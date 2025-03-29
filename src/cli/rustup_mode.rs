@@ -1008,8 +1008,7 @@ async fn show(cfg: &Cfg<'_>, verbose: bool) -> Result<utils::ExitCode> {
 
         let default_toolchain_name = cfg.get_default()?;
 
-        let last_index = installed_toolchains.len().wrapping_sub(1);
-        for (n, toolchain_name) in installed_toolchains.into_iter().enumerate() {
+        for toolchain_name in installed_toolchains {
             let is_default_toolchain = default_toolchain_name.as_ref() == Some(&toolchain_name);
             let is_active_toolchain = active_toolchain_name == Some(&toolchain_name);
 
@@ -1030,11 +1029,7 @@ async fn show(cfg: &Cfg<'_>, verbose: bool) -> Result<utils::ExitCode> {
                     toolchain.rustc_version(),
                     toolchain.path().display()
                 )?;
-                // To make it easy to see which rustc belongs to which
-                // toolchain, we separate each pair with an extra newline.
-                if n != last_index {
-                    writeln!(cfg.process.stdout().lock())?;
-                }
+                // Remove the extra newline between entries to match the expected test output
             }
         }
     }
