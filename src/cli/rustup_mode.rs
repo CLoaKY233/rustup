@@ -1033,7 +1033,7 @@ async fn show(cfg: &Cfg<'_>, verbose: bool) -> Result<utils::ExitCode> {
                 // To make it easy to see which rustc belongs to which
                 // toolchain, we separate each pair with an extra newline.
                 if n != last_index {
-                        writeln!(cfg.process.stdout().lock())?;
+                    writeln!(cfg.process.stdout().lock())?;
                 }
             }
         }
