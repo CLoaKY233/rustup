@@ -1,0 +1,18 @@
+bin.name = "rustup[EXE]"
+args = ["component", "list", "--help"]
+
+stdout = """
+...
+List installed and available components
+
+Usage: rustup[EXE] component list [OPTIONS]
+
+Options:
+      --toolchain <TOOLCHAIN>  Toolchain name, such as 'stable', 'nightly', or '1.8.0'. For more
+                               information see `rustup help toolchain`
+      --installed              List only installed components
+  -q, --quiet                  Force the output to be a single column
+  -v, --verbose                Show verbose output with component paths
+  -h, --help                   Print help
+"""
+stderr = ""
