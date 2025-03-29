@@ -1007,8 +1007,8 @@ async fn show(cfg: &Cfg<'_>, verbose: bool) -> Result<utils::ExitCode> {
         print_header::<Error>(&mut t, "installed toolchains")?;
 
         let default_toolchain_name = cfg.get_default()?;
-
-        for toolchain_name in installed_toolchains {
+        let last_index = installed_toolchains.len().wrapping_sub(1);
+        for (n, toolchain_name) in installed_toolchains.into_iter().enumerate() {
             let is_default_toolchain = default_toolchain_name.as_ref() == Some(&toolchain_name);
             let is_active_toolchain = active_toolchain_name == Some(&toolchain_name);
 
@@ -1029,7 +1029,9 @@ async fn show(cfg: &Cfg<'_>, verbose: bool) -> Result<utils::ExitCode> {
                     toolchain.rustc_version(),
                     toolchain.path().display()
                 )?;
-                // Remove the extra newline between entries to match the expected test output
+                if n != last_index {
+                    writeln!(cfg.process.stdout().lock())?;
+                }
             }
         }
     }

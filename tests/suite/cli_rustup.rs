@@ -1198,6 +1198,7 @@ installed toolchains
 nightly-{0} (active, default)
   1.3.0 (hash-nightly-2)
   path: {2}
+
 nightly-2015-01-01-{0}
   1.2.0 (hash-nightly-1)
   path: {3}
