@@ -1026,13 +1026,14 @@ async fn show(cfg: &Cfg<'_>, verbose: bool) -> Result<utils::ExitCode> {
                 let toolchain = Toolchain::new(cfg, toolchain_name.into())?;
                 writeln!(
                     cfg.process.stdout().lock(),
-                    "  {}",
-                    toolchain.rustc_version()
+                    "  {}\n  path: {}",
+                    toolchain.rustc_version(),
+                    toolchain.path().display()
                 )?;
                 // To make it easy to see which rustc belongs to which
                 // toolchain, we separate each pair with an extra newline.
                 if n != last_index {
-                    writeln!(cfg.process.stdout().lock())?;
+                        writeln!(cfg.process.stdout().lock())?;
                 }
             }
         }
